@@ -10,6 +10,7 @@
   --color-navy-blue-modal: #2e2f42;
   --color-grey: #2e2f42;
   --color-white: #ffffff;
+  --main-duration-and-function: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 body {
   background-color: var(--color-white);
@@ -100,10 +101,6 @@ button {
   font-weight: 500;
   color: var(--color-navy-blue);
 }
-.header-link:hover,
-.header-link:focus {
-  color: var(--color-ocean);
-}
 .header-link {
   font-size: 16px;
   line-height: 1.5;
@@ -111,6 +108,12 @@ button {
   padding-top: 24px;
   padding-bottom: 24px;
   display: block;
+
+  transition: color var(--main-duration-and-function);
+}
+.header-link:hover,
+.header-link:focus {
+  color: var(--color-ocean);
 }
 .address-link {
   color: var(--color-slate);
@@ -148,6 +151,21 @@ button {
   clip: rect(0 0 0 0);
   overflow: hidden;
 }
+.current {
+  color: #404bbf;
+  position: relative;
+}
+
+.current::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: var(--color-ocean);
+  border-radius: 2px;
+}
 /*---------------------Секція 1-герой------------------*/
 .hero {
   margin: 0 auto;
@@ -184,6 +202,9 @@ button {
   border-radius: 4px;
   border: none;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+
+  transition: background-color var(--main-duration-and-function),
+    box-shadow var(--main-duration-and-function);
 }
 .btn {
   font-family: inherit;
@@ -196,6 +217,7 @@ button {
 .button:hover,
 .button:focus {
   background-color: var(--color-ocean);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 }
 /* --------------Секція 2---------------- */
 .section {
@@ -258,6 +280,8 @@ button {
   height: 100%;
   background-color: var(--color-iris);
   border-radius: 50%;
+
+  transition: background-color var(--main-duration-and-function);
 }
 .team-link:hover,
 .team-link:focus {
@@ -287,6 +311,9 @@ button {
   border: 1px solid #8e8f99;
   border-radius: 4px;
   color: var(--color-light-slate);
+
+  transition: border-color var(--main-duration-and-function),
+    color var(--main-duration-and-function);
 }
 .customers-link:hover,
 .customers-link:focus {
@@ -333,6 +360,8 @@ button {
   height: 100%;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
+
+  transition: background-color var(--main-duration-and-function);
 }
 .media-link:hover,
 .media-link:focus {
@@ -350,6 +379,70 @@ button {
   color: #ffffff;
   margin-bottom: 16px;
 }
+/* ------------модальне вікно--------- */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(46, 47, 66, 0.4);
+
+  transition: opacity var(--main-duration-and-function),
+    visibility var(--main-duration-and-function);
+}
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(1.2);
+  transition: transform var(--main-duration-and-function);
+}
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.1);
+  transition: transform var(--main-duration-and-function);
+
+  min-width: 408px;
+  min-height: 576px;
+  background-color: #fcfcfc;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.close-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  fill: currentColor;
+}
+.modal-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 24px;
+  height: 24px;
+  background-color: var(--color-cornflower);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--color-navy-blue);
+
+  transition: background-color var(--main-duration-and-function),
+    color var(--main-duration-and-function),
+    border-color var(--main-duration-and-function);
+}
+.modal-btn:hover,
+.modal-btn:focus {
+  background-color: var(--color-ocean);
+  color: var(--color-white);
+  border-color: transparent;
+}
 /*-------------- Portfolio------------ */
 .list-button {
   color: var(--color-iris);
@@ -358,15 +451,19 @@ button {
   border-radius: 4px;
   padding: 12px 24px;
   border: 1px solid #e7e9fc;
+
+  transition: background-color var(--main-duration-and-function),
+    color var(--main-duration-and-function),
+    box-shadow var(--main-duration-and-function),
+    border-color var(--main-duration-and-function);
 }
 .list-button:hover,
 .list-button:focus {
-  color: var(--color-white);
   background-color: var(--color-ocean);
+  color: var(--color-white);
   border-color: transparent;
   box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 2px 1px rgba(0, 0, 0, 0.08),
     0px 2px 2px rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
 }
 .container-list {
   display: flex;
@@ -376,6 +473,8 @@ button {
 }
 .portfolio-link {
   display: block;
+
+  transition: box-shadow var(--main-duration-and-function);
 }
 .portfolio-section {
   padding-top: 96px;
@@ -400,4 +499,28 @@ button {
   border-right: 1px solid #e7e9fc;
   border-bottom: 1px solid #e7e9fc;
   border-left: 1px solid #e7e9fc;
+}
+.card {
+  position: relative;
+  overflow: hidden;
+}
+.card-text {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-cloud);
+
+  position: absolute;
+  background-color: var(--color-iris);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 40px 32px 164px;
+  overflow: auto;
+  transition: transform var(--main-duration-and-function);
+  transform: translateY(100%);
+}
+.portfolio-link:hover .card-text,
+.portfolio-link:focus .card-text {
+  transform: translateY(0);
 }
